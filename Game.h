@@ -62,18 +62,18 @@ public:
 
     void run();
 
-    void updatePollEvents();
+    void updatePollEvents() const;
     void updateInput();
     void updateGUI();
     void updateWorld();
-    void updateCollision();
+    void updateCollision() const;
     void updateBullets();
     void updateEnemies();
     void updateCombat();
     void update();
 
-    void renderGUI();
-    void renderWorld();
+    void renderGUI() const;
+    void renderWorld() const;
     void render();
 };
 

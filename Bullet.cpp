@@ -1,7 +1,7 @@
 #include "Bullet.h"
 
 
-Bullet::Bullet(const sf::Texture * texture, float pos_x, float pos_y, float dir_x, float dir_y, float movement_speed)
+Bullet::Bullet(const sf::Texture * texture, const float pos_x, const float pos_y, const float dir_x, const float dir_y, const float movement_speed)
 {
     this->shape.setTexture(*texture);
 

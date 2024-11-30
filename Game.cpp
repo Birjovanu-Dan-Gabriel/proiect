@@ -81,9 +81,7 @@ Game::Game()
 }
 
 Game::~Game()
-{
-
-}
+= default;
 
 void Game::run()
 {
@@ -98,16 +96,12 @@ void Game::run()
 	}
 }
 
-void Game::updatePollEvents()
-{
-	sf::Event e;
+void Game::updatePollEvents() const {
+	sf::Event e{};
 	while (this->window->pollEvent(e))
-	{
 		if (e.Event::type == sf::Event::Closed)
 			this->window->close();
-		if (e.Event::KeyPressed && e.Event::key.code == sf::Keyboard::Escape)
-			this->window->close();
-	}
+
 }
 
 void Game::updateInput()
@@ -145,17 +139,13 @@ void Game::updateGUI()
 
 	this->pointText.setString(ss.str());
 
-	float hpPercent = static_cast<float>(this->player->getHp()) / this->player->getHpMax();
+	const float hpPercent = static_cast<float>(this->player->getHp()) / this->player->getHpMax();
 	this->playerHpBar.setSize(sf::Vector2f(300.f * hpPercent, this->playerHpBar.getSize().y));
 }
 
-void Game::updateWorld()
-{
 
-}
 
-void Game::updateCollision()
-{
+void Game::updateCollision() const {
 	//left
 	if (this->player->getBounds().left < 0.f)
 	{
@@ -268,18 +258,16 @@ void Game::update()
 
 	this->updateGUI();
 
-	this->updateWorld();
+
 }
 
-void Game::renderGUI()
-{
+void Game::renderGUI() const {
 	this->window->draw(this->pointText);
 	this->window->draw(this->playerHpBarBack);
 	this->window->draw(this->playerHpBar);
 }
 
-void Game::renderWorld()
-{
+void Game::renderWorld() const {
 	this->window->draw(this->worldBackground);
 }
 

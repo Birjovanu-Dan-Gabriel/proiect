@@ -22,7 +22,7 @@ private:
     int hp;
     int hpMax;
 
-    void initVariables();
+
     void initTexture();
     void initSprite();
 

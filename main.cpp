@@ -5,10 +5,10 @@
 int main()
 {
 	//init rand
-	std::srand(static_cast<unsigned>(time(NULL)));
+	std::srand(static_cast<unsigned>(time(nullptr)));
 
 
-	//initializare game
+	//game initialisation
 	Game game;
 	game.run();
 	return 0;

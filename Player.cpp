@@ -1,6 +1,23 @@
 #include "Player.h"
 #include <iostream>
-void Player::initVariables()
+
+
+void Player::initTexture()
+{
+    if (!this->texture.loadFromFile("../assets/protagonist.png"))
+    {
+        std::cout << "background error" << "\n";
+    }
+}
+
+void Player::initSprite()
+{
+    //texture player
+    this->sprite.setTexture(this->texture);
+    this->sprite.scale(0.25f, 0.25f);
+}
+
+Player::Player()
 {
     this->movementSpeed = 2.f;
 
@@ -9,34 +26,12 @@ void Player::initVariables()
 
     this->hpMax = 100;
     this->hp = this->hpMax;
-}
-
-void Player::initTexture()
-{
-    if (!this->texture.loadFromFile("../assets/protagonist.png"))
-    {
-        std::cout << "Eroare background" << "\n";
-    }
-}
-
-void Player::initSprite()
-{
-    //textura player
-    this->sprite.setTexture(this->texture);
-    this->sprite.scale(0.25f, 0.25f);
-}
-
-Player::Player()
-{
-    this->initVariables();
     this->initTexture();
     this->initSprite();
 }
 
 Player::~Player()
-{
-
-}
+= default;
 
 const sf::Vector2f & Player::getPos() const
 {
