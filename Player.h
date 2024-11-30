@@ -1,47 +1,58 @@
-#pragma once
+//
+// Created by birjo on 11/29/2024.
+//
+
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include<SFML/Graphics.hpp>
-#include<SFML/System.hpp>
-#include<iostream>
+
 
 class Player
 {
 private:
-	sf::Sprite sprite;
-	sf::Texture texture;
+    sf::Sprite sprite;
+    sf::Texture texture;
 
-	float movementSpeed;
+    float movementSpeed;
 
-	float attackCooldown;
-	float attackCooldownMax;
+    float attackCooldown;
+    float attackCooldownMax;
 
-	int hp;
-	int hpMax;
+    int hp;
+    int hpMax;
 
-	void initVariables();
-	void initTexture();
-	void initSprite();
+    void initVariables();
+    void initTexture();
+    void initSprite();
 
 public:
-	Player();
-	virtual ~Player();
+    Player();
+    virtual ~Player();
 
-	const sf::Vector2f& getPos() const;
-	const sf::FloatRect getBounds() const;
-	const int& getHp() const;
-	const int& getHpMax() const;
+    const sf::Vector2f& getPos() const;
 
-	
-	void setPosition(const sf::Vector2f pos);
-	void setPosition(const float x, const float y);
-	void setHp(const int hp);
-	void loseHp(const int value);
+    sf::FloatRect getBounds() const;
+    const int& getHp() const;
+    const int& getHpMax() const;
 
-	
-	void move(const float dirX, const float dirY);
-	const bool canAttack();
 
-	void updateAttack();
-	void update();
-	void render(sf::RenderTarget& target);
+    void setPosition( sf::Vector2f pos);
+    void setPosition( float x,  float y);
+    void setHp( int hp);
+    void loseHp( int value);
+
+
+    void move( float dirX,  float dirY);
+
+    bool canAttack();
+
+    void updateAttack();
+    void update();
+    void render(sf::RenderTarget& target) const;
 };
+
+
+
+
+#endif //PLAYER_H

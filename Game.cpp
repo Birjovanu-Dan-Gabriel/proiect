@@ -10,13 +10,13 @@ void Game::initWindow()
 void Game::initTextures()
 {
 	this->textures["BULLET"] = new sf::Texture();
-	this->textures["BULLET"]->loadFromFile("Textures/bullet.png");
+	this->textures["BULLET"]->loadFromFile("../assets/bullet.png");
 }
 
 void Game::initGUI()
 {
 
-	if (!this->font.loadFromFile("Fonts/PixellettersFull.ttf"))
+	if (!this->font.loadFromFile("../assets/PixellettersFull.ttf"))
 		std::cout << "Eroare font" << "\n";
 
 	this->pointText.setPosition(700.f, 25.f);
@@ -30,7 +30,7 @@ void Game::initGUI()
 	this->gameOverText.setFillColor(sf::Color::Red);
 	this->gameOverText.setString("Game Over!");
 	this->gameOverText.setPosition(
-		this->window->getSize().x / 2.f - this->gameOverText.getGlobalBounds().width / 2.f, 
+		this->window->getSize().x / 2.f - this->gameOverText.getGlobalBounds().width / 2.f,
 		this->window->getSize().y / 2.f - this->gameOverText.getGlobalBounds().height / 2.f);
 
 	this->playerHpBar.setSize(sf::Vector2f(300.f, 25.f));
@@ -43,7 +43,7 @@ void Game::initGUI()
 
 void Game::initWorld()
 {
-	if (!this->worldBackgroundTex.loadFromFile("Textures/background.jpg"))
+	if (!this->worldBackgroundTex.loadFromFile("../assets/bg.jpg"))
 	{
 		std::cout << "eroare background" << "\n";
 	}
@@ -82,7 +82,7 @@ Game::Game()
 
 Game::~Game()
 {
-	
+
 }
 
 void Game::run()
@@ -126,11 +126,11 @@ void Game::updateInput()
 	{
 		this->bullets.push_back(
 			new Bullet(
-			this->textures["BULLET"], 
-			this->player->getPos().x + this->player->getBounds().width/2.f, 
-			this->player->getPos().y, 
-			0.f, 
-			-1.f, 
+			this->textures["BULLET"],
+			this->player->getPos().x + this->player->getBounds().width/2.f,
+			this->player->getPos().y,
+			0.f,
+			-1.f,
 			5.f
 			)
 		);
@@ -161,13 +161,13 @@ void Game::updateCollision()
 	{
 		this->player->setPosition(0.f, this->player->getBounds().top);
 	}
-	//Right 
+	//Right
 	else if (this->player->getBounds().left + this->player->getBounds().width >= this->window->getSize().x)
 	{
 		this->player->setPosition(this->window->getSize().x - this->player->getBounds().width, this->player->getBounds().top);
 	}
 
-	//Top 
+	//Top
 	if (this->player->getBounds().top < 0.f)
 	{
 		this->player->setPosition(this->player->getBounds().left, 0.f);

@@ -44,6 +44,13 @@ include(cmake/Options.cmake)
 add_executable(${PROJECT_NAME}
         main.cpp
         generated/src/Helper.cpp
+        Enemy.cpp
+        Enemy.h
+        Bullet.cpp
+        Bullet.h
+        Game.cpp
+        Player.cpp
+        Player.h
 
 
 )
