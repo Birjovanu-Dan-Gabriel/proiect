@@ -10,7 +10,6 @@ project(oop)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-
 include(cmake/Options.cmake)
 
 ###############################################################################
@@ -43,11 +42,23 @@ include(cmake/Options.cmake)
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 add_executable(${PROJECT_NAME}
-    main.cpp
-    generated/src/Helper.cpp
+        main.cpp
+        generated/src/Helper.cpp
+
+
 )
 
 include(cmake/CompilerFlags.cmake)
+
+###############################################################################
+
+#Include interfata grafica SFML
+include(FetchContent)
+set(BUILD_SHARED_LIBS OFF)
+FETCHCONTENT_DECLARE(SFML GIT_REPOSITORY https://github.com/SFML/SFML.git GIT_TAG 2.5.1)
+FETCHCONTENT_MAKEAVAILABLE(SFML)
+
+
 
 ###############################################################################
 
@@ -56,7 +67,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE generated/include)
 # target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ext/<SomeHppLib>/include)
 # target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)
 # target_link_directories(${PROJECT_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
-# target_link_libraries(${PROJECT_NAME} <SomeLib>)
+target_link_libraries(${PROJECT_NAME} sfml-graphics)
 
 ###############################################################################
 
