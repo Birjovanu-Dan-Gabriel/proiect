@@ -1,44 +1,36 @@
-//
-// Created by birjo on 11/29/2024.
-//
-
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <exception>
 
-
-
-#include<SFML/Graphics.hpp>
-
-
-
-
-class Enemy
-{
-private:
-    int pointCount{};
-    sf::CircleShape shape;
-    int type{};
-    float speed{};
-    int hp{};
-    int hpMax{};
-    int damage{};
-    int points{};
-
-    void initShape();
-
+// Enemy base class
+class Enemy {
 public:
-    Enemy(float pos_x, float pos_y);
-    virtual ~Enemy();
+    // Virtual constructor
 
-    sf::FloatRect getBounds() const;
+    virtual ~Enemy() = default; // Destructor virtual
+
+    // Pure virtual functions
+    //This means that the derived classed are forced to implement this
+    virtual void initShape() = 0;
+    virtual void update() = 0;
+    virtual void render(sf::RenderTarget* target) const = 0;
+
+    // Access functions
     const int& getPoints() const;
     const int& getDamage() const;
+    sf::FloatRect getBounds() const;
 
-    void update();
-    void render(sf::RenderTarget* target) const;
+protected:
+    sf::CircleShape shape;
+    int pointCount = 0;
+    float speed =0;
+    int hpMax =0;
+    int hp =0;
+    int damage = 0;
+    int points = 0;
 };
 
-
-
-#endif //ENEMY_H
+#endif

@@ -51,6 +51,14 @@ add_executable(${PROJECT_NAME}
         Game.cpp
         Player.cpp
         Player.h
+        Enemy_1.cpp
+        Enemy_1.h
+        Enemy_2.cpp
+        Enemy_2.h
+        Enemy_3.cpp
+        Enemy_3.h
+        Exceptions.cpp
+        Exceptions.h
 
 
 )

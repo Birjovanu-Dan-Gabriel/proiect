@@ -12,7 +12,7 @@ class Player
 {
 private:
     sf::Sprite sprite;
-    sf::Texture texture;
+    static sf::Texture texture;
 
     float movementSpeed;
 
@@ -23,7 +23,7 @@ private:
     int hpMax;
 
 
-    void initTexture();
+    static void initTexture();
     void initSprite();
 
 public:
