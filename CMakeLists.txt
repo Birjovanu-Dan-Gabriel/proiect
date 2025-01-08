@@ -90,7 +90,7 @@ target_link_libraries(${PROJECT_NAME}
         sfml-window
         sfml-system
 )
-
+set(SFML_STATIC_LIBRARIES TRUE)
 ###############################################################################
 
 # copy binaries to "bin" folder; these are uploaded as artifacts on each release
