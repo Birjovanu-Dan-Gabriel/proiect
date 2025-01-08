@@ -1,72 +1,120 @@
-
 #ifndef GAME_H
 #define GAME_H
 
-#include<map>
-#include<string>
-#include <iostream>
-#include <sstream>
-#include"Player.h"
-#include"Bullet.h"
-#include"Enemy.h"
-#include"Enemy_1.h"
-#include <memory>  // for std::unique_ptr
-#include "Enemy_3.h"
+
+#include <vector>
+#include <memory>
+#include <SFML/Graphics.hpp>
+#include "Player.h"
+#include "Bullet.h"
+#include "Enemy.h"
+#include "Enemy_1.h"
 #include "Enemy_2.h"
-#include "memory"
+#include "Enemy_3.h"
+#include "ResourceManager.h"
 
-class Game
-{
+class Observer {
+public:
+    virtual ~Observer() = default;
+    virtual void update(int points, int level) = 0;
+};
+
+class Subject {
+public:
+    virtual ~Subject() = default;
+    virtual void addObserver(Observer* observer) = 0;
+    virtual void removeObserver(Observer* observer) = 0;
+    virtual void notifyObservers() = 0;
+};
+class ScoreObserver : public Observer {
+public:
+    void update(int points, int level) override;
+};
+
+class EnemyFactory {
+public:
+    virtual std::unique_ptr<Enemy> createEnemy(float posX, float posY) = 0;
+    virtual ~EnemyFactory() = default;
+};
+
+class Enemy1Factory : public EnemyFactory {
+public:
+    std::unique_ptr<Enemy> createEnemy(float posX, float posY) override {
+        return std::make_unique<Enemy_1>(posX, posY);
+    }
+};
+
+class Enemy2Factory : public EnemyFactory {
+public:
+    std::unique_ptr<Enemy> createEnemy(float posX, float posY) override {
+        return std::make_unique<Enemy_2>(posX, posY);
+    }
+};
+
+class Enemy3Factory : public EnemyFactory {
+public:
+    std::unique_ptr<Enemy> createEnemy(float posX, float posY) override {
+        return std::make_unique<Enemy_3>(posX, posY);
+    }
+};
+
+class Game : public Subject {
 private:
-
+    // Private attributes
     sf::RenderWindow* window;
-    std::map<std::string, sf::Texture*> textures;
     std::vector<std::unique_ptr<Bullet>> bullets;
+    std::vector<std::unique_ptr<Enemy>> enemies;
+    std::vector<Observer*> observers;
 
-    ///font and text definitions
     sf::Font font;
     sf::Text pointText;
-
     sf::Text gameOverText;
-    sf::Text lvlText;
+    sf::RectangleShape playerHpBar;
+    sf::RectangleShape playerHpBarBack;
 
-    //background texture definition
     sf::Texture worldBackgroundTex;
     sf::Sprite worldBackground;
 
-    //points
-    unsigned points;
+    ResourceManager<sf::Texture> textureManager;
+    ResourceManager<sf::Font> fontManager;
 
-
-    Player* player;
-
-    //GUI - hp bar
-    sf::RectangleShape playerHpBar;
-    sf::RectangleShape playerHpBarBack;
+    sf::Text lvlText;
+    int lvl;
 
     float spawnTimer;
     float spawnTimerMax;
 
-    std::vector<std::unique_ptr<Enemy>> enemies;
+    int points;
+    Player* player;
 
-    int lvl;
+    static Game* instance; // Declaration for Singleton instance
 
-    void initWindow(); //initialises the window
-    void initTextures(); //init bullet textures
-    void initGUI(); //gui
-    void initWorld();// init background
-    void initSystems();
-    void initNextLvlGUI(); // "Lvl x" text
-    void initPlayer();
+    std::vector<std::unique_ptr<EnemyFactory>> enemyFactories;
+    int currentFactoryIndex;
+
+    // Private functions
+    Game(); // Constructor is private for Singleton
+    void initWindow();
+    void initTextures();
+    void initGUI();
+    void initWorld();
     void initEnemies();
-    void initLvl2(); //init next lvl
+    void initNextLvlGUI();
+    void initLvl();
 
 public:
-    Game();
-    virtual ~Game();
+    // Deleted copy constructor and assignment operator for Singleton
+    Game(const Game&) = delete;
+    Game& operator=(const Game&) = delete;
 
+    // Destructor
+    ~Game() override;
+
+    // Singleton accessor
+    static Game& getInstance();
+
+    // Public functions
     void run();
-
     void updatePollEvents() const;
     void updateInput();
     void updateGUI();
@@ -75,13 +123,20 @@ public:
     void updateEnemies();
     void updateCombat();
     void update();
-
-    void renderGUI() const;
+    void initEnemyFactories();
+    void  renderGUI() const;
     void renderWorld() const;
     void render() const;
+
+    // Observer pattern methods
+    void addObserver(Observer* observer) override;
+    void removeObserver(Observer* observer) override;
+    void notifyObservers() override;
+
+    // Getter methods for observers
+    int getPoints() const { return points; }
+    int getLevel() const { return lvl; }
+
 };
 
-
-
-
-#endif //GAME_H
+#endif

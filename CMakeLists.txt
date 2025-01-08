@@ -59,6 +59,9 @@ add_executable(${PROJECT_NAME}
         Enemy_3.h
         Exceptions.cpp
         Exceptions.h
+        Singleton.cpp
+        Singleton.h
+        ResourceManager.h
 
 
 )

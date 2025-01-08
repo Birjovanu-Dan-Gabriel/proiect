@@ -38,7 +38,7 @@ Enemy_2::Enemy_2(float pos_x, float pos_y) {
 
 ///shape initialisation
 void Enemy_2::initShape() {
-        this->shape.setPointCount(DefaultPointCount);
+        this->shape.setPointCount(4);
         this->shape.setRadius(DefaultRadius);
         this->shape.setFillColor(DefaultColor);
 }
