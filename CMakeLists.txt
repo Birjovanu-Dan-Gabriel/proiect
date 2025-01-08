@@ -79,6 +79,8 @@ FETCHCONTENT_MAKEAVAILABLE(SFML)
 find_package(X11 REQUIRED)
 target_link_libraries(${PROJECT_NAME} ${X11_LIBRARIES})
 
+file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
+
 
 ###############################################################################
 
