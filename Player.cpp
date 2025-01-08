@@ -1,5 +1,5 @@
 #include "Player.h"
-#include <iostream>
+
 
 #include "Exceptions.h"
 
@@ -77,15 +77,8 @@ void Player::setPosition(const float x, const float y)
 }
 
 
-// set hp
-void Player::setHp(const int hp)
-{
-    this->hp = hp;
-}
-
-
 //loseHP
-void Player::loseHp(const int value)
+void Player::loseHp(int value)
 {
     this->hp -= value;
     if (this->hp < 0)

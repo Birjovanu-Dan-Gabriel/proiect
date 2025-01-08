@@ -79,7 +79,15 @@ FETCHCONTENT_MAKEAVAILABLE(SFML)
 find_package(X11 REQUIRED)
 target_link_libraries(${PROJECT_NAME} ${X11_LIBRARIES})
 
+
 file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
+target_link_libraries(${PROJECT_NAME}
+        sfml-graphics
+        sfml-window
+        sfml-system
+)
+
+set(SFML_STATIC_LIBRARIES TRUE)
 
 
 ###############################################################################
@@ -89,12 +97,8 @@ target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE generated/include)
 # target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ext/<SomeHppLib>/include)
 # target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)
 # target_link_directories(${PROJECT_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
-target_link_libraries(${PROJECT_NAME}
-        sfml-graphics
-        sfml-window
-        sfml-system
-)
-set(SFML_STATIC_LIBRARIES TRUE)
+
+
 ###############################################################################
 
 # copy binaries to "bin" folder; these are uploaded as artifacts on each release
@@ -105,6 +109,5 @@ if(APPLE)
 endif()
 
 include(cmake/CopyHelper.cmake)
-copy_files(FILES tastatura.txt)
 # copy_files(FILES tastatura.txt config.json DIRECTORY images sounds)
 # copy_files(DIRECTORY images sounds)

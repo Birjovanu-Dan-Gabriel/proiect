@@ -73,6 +73,8 @@ void Game::initGUI()
 
 //initialises background
 void Game::initWorld() {
+
+        textureManager.loadResource("BACKGROUND", "../assets/bg.jpg");
         this->worldBackground.setTexture(*textureManager.getResource("BACKGROUND"));
 }
 

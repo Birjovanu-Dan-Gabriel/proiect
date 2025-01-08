@@ -12,6 +12,7 @@ int main()
 	//game initialisation
 	Game& game = Game::getInstance();
 
+
 	ScoreObserver scoreObserver;
 	game.addObserver(&scoreObserver);
 	game.run();
