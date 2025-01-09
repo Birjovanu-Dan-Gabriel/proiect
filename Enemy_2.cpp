@@ -19,10 +19,10 @@ Enemy_2::Enemy_2(float pos_x, float pos_y) {
 
         ///Enemy variables initialisation
         this->pointCount = DefaultPointCount;
-        this->speed = calculateSpeed(this->pointCount);
+        this->speed = calculateSpeed(this->pointCount) + 2;
         this->hpMax = this->pointCount;
         this->hp = this->hpMax;
-        this->damage = 10;
+        this->damage = 20;
         this->points = this->pointCount;
 
 

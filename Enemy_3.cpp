@@ -17,10 +17,10 @@ Enemy_3::Enemy_3(float pos_x, float pos_y) {
 
         ///Enemy variables initialisation
         this->pointCount = DefaultPointCount;
-        this->speed = calculateSpeed(this->pointCount);
+        this->speed = calculateSpeed(this->pointCount) + 3;
         this->hpMax = this->pointCount;
         this->hp = this->hpMax;
-        this->damage = 10;
+        this->damage = 30;
         this->points = this->pointCount;
 
         this->Enemy_3::initShape(); ///initialise shape
@@ -35,7 +35,7 @@ Enemy_3::Enemy_3(float pos_x, float pos_y) {
 
 ///shape initialisation
 void Enemy_3::initShape() {
-        this->shape.setPointCount(DefaultPointCount);
+        this->shape.setPointCount(5);
         this->shape.setRadius(DefaultRadius);
         this->shape.setFillColor(DefaultColor);
 }

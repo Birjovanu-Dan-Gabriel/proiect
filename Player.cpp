@@ -32,7 +32,7 @@ Player::Player()
 {
 
     this->movementSpeed = 4.f; // movement speed
-    this->attackCooldownMax = 10.f; //max attack cooldown
+    this->attackCooldownMax = 30.f; //max attack cooldown
     this->attackCooldown = this->attackCooldownMax;
     this->hpMax = 100; //maximum hp
     this->hp = this->hpMax; //initial hp
